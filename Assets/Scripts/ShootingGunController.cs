@@ -61,8 +61,8 @@ public class ShootingGunController : MonoBehaviour
     private void Update()
     {
         transform.rotation=Quaternion.Slerp(transform.rotation,InputTracking.GetLocalRotation(VRNode.Head),damping * (1 - Mathf.Exp(dampingCoef * Time.deltaTime)));
-        transform.position = cameraTransform.position;
-        Quaternion lookAtRotation = Quaternion.LookRotation(reticle.ReticleTransform.position - gunContainer.position);
+        transform.position = cameraTransform.position; 
+        Quaternion lookAtRotation = Quaternion.LookRotation(reticle.ReticleTransform.position - gunContainer.position);//手看的方向
         gunContainer.rotation = Quaternion.Slerp(gunContainer.rotation, lookAtRotation, gunContainerSmooth * Time.deltaTime);
     }
 
