@@ -19,6 +19,12 @@ public class ShootingTarget : MonoBehaviour
     public GameObject destroyPrefab;
     private bool isEnding;
 
+    public float timOutDuration = 2f;
+    public AudioClip spawnClip;
+    public AudioClip missedClip;
+
+
+
     private void Awake()
     {
         cameraTransform = Camera.main.transform;
@@ -54,6 +60,10 @@ public class ShootingTarget : MonoBehaviour
 
     private IEnumerator OnHit()
     {
+        if (isEnding) 
+        yield break;
+        isEnding = true;
+
         mRenderer.enabled = false;
         mCollider.enabled = false;
         audioSource.clip = destroyClip;
@@ -65,5 +75,40 @@ public class ShootingTarget : MonoBehaviour
         if (OnRemove != null)
             OnRemove(this);
 
+    }
+
+    public void Restart()
+    {
+        mRenderer.enabled = true;
+        mCollider.enabled = true;
+        isEnding = false;
+        audioSource.clip = spawnClip;
+        audioSource.Play();
+        transform.LookAt(cameraTransform.position);
+        StartCoroutine(MissTarge());
+
+
+    }
+
+    private IEnumerator MissTarge()
+    {
+        yield return new WaitForSeconds(destroyTimeOutDuration);
+
+        if (isEnding)
+        {
+            yield break;
+            isEnding = true;
+            mRenderer.enabled = false;
+            mCollider.enabled = false;
+            audioSource.clip = missedClip;
+            audioSource.Play();
+
+            yield return new WaitForSeconds(missedClip.length);
+            if (OnRemove!=null)
+            {
+                OnRemove(this);
+            }
+
+        }
     }
 }
