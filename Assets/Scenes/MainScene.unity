@@ -142,6 +142,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 329131288}
   m_Script: {fileID: 11500000, guid: 8902ef04f323e444b98d2e4fd80a56ab, type: 3}
+--- !u!114 &85272722 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11495966, guid: ccf8c8cc05aad7b40a8deb4f73296da4,
+    type: 2}
+  m_PrefabInternal: {fileID: 329131288}
+  m_Script: {fileID: 11500000, guid: ffebc012055484b4899e163803755608, type: 3}
 --- !u!4 &85272727 stripped
 Transform:
   m_PrefabParentObject: {fileID: 493278, guid: ccf8c8cc05aad7b40a8deb4f73296da4, type: 2}
@@ -216,6 +222,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 2019929977}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &670926936 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114955560038706432, guid: c3ebde65bbd3c5c43a27cf4be9502c0b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1012475995}
+  m_Script: {fileID: 11500000, guid: 090a125650566664ca9744f1258e0423, type: 3}
 --- !u!114 &705686779 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114140397414338828, guid: c3ebde65bbd3c5c43a27cf4be9502c0b,
@@ -592,6 +604,16 @@ Prefab:
       propertyPath: gunContainer
       value: 
       objectReference: {fileID: 1628455011}
+    - target: {fileID: 114011971931558918, guid: 31e7b5e5c22f22d4db72ced1750fc25b,
+        type: 2}
+      propertyPath: shootingGalleryController
+      value: 
+      objectReference: {fileID: 670926936}
+    - target: {fileID: 114011971931558918, guid: 31e7b5e5c22f22d4db72ced1750fc25b,
+        type: 2}
+      propertyPath: eyeRaycaster
+      value: 
+      objectReference: {fileID: 85272722}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 31e7b5e5c22f22d4db72ced1750fc25b, type: 2}
   m_IsPrefabParent: 0

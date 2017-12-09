@@ -12,14 +12,17 @@ public class ShootingGunController : MonoBehaviour
     public Transform gunEnd;
     public LineRenderer gunFlare;
     public float gunFlareVisibleSeconds = 0.07f;
-    //......................................
+    public ShootingGalleryController shootingGalleryController;
+    public VREyeRaycaster eyeRaycaster;
+
+
     public Transform cameraTransform;
     public Reticle reticle;
     public Transform gunContainer;
     public float damping = 0.5f;
     public float dampingCoef = 20f;
     public float gunContainerSmooth = 10f;
-    //......................................
+  
     private void OnEnable()
     {
         vrInput.OnDown += HandleDown;//事件用法+=
@@ -32,15 +35,21 @@ public class ShootingGunController : MonoBehaviour
 
     private void HandleDown()       //方法
     {
-       
-        StartCoroutine(Fire());
+        if (shootingGalleryController.IsPlaying == false)
+            return;
+        ShootingTarget shootingTarget = eyeRaycaster.CurrentInteractible ? eyeRaycaster.CurrentInteractible.GetComponent<ShootingTarget>() : null;
+        Transform target = shootingTarget ? shootingTarget.transform : null;
+        StartCoroutine(Fire(target));
        
     }
-    private IEnumerator Fire()
+    private IEnumerator Fire(Transform target)
     {
         audiosource.Play(); 
     
         float lineLength = defaultLineLength;   //todo判斷有無射到東西
+        if (target)
+            lineLength = Vector3.Distance(gunEnd.position,target.position);
+
         flareParticle.Play();                   //粒子
         gunFlare.enabled = true;
         yield return StartCoroutine(MoveLineRenderer(lineLength)); //先回去上面，在往下
